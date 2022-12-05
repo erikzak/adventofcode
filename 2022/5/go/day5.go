@@ -9,7 +9,7 @@ import (
 	"strings"
 	"unicode"
 
-	"aoc/5/crane"
+	"github.com/erikzak/adventofcode/2022/5/crane"
 )
 
 const inputPath = "../input.txt"
