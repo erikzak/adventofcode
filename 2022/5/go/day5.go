@@ -45,7 +45,7 @@ func readInput(path string, crateLines int) crane.Crane {
 	stacks := map[rune]crane.Stack{}
 	for i, field := range strings.Fields(lines[crateLines]) {
 		id := rune(field[0])
-		// First item in crate slice is bottom crate
+		// First item in crate slice is top crate
 		stacks[id] = crane.NewStack(id, crates[i])
 	}
 	// Crate moves in the remaining lines (after 1 blank)
