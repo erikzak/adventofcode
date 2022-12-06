@@ -3,9 +3,9 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
+	"time"
 )
 
 const inputPath = "../input.txt"
@@ -42,25 +42,31 @@ func (radio *Radio) FindMarker(length int) *int {
 }
 
 // Parses puzzle input from txt file.
-// Returns a radio instance with methods to find markers.
-func readInput(path string) *Radio {
+// Returns []byte.
+func readInput(path string) *[]byte {
 	inputBytes, err := os.ReadFile(path)
 	check(err)
-	radio := NewRadio(&inputBytes)
-	return radio
+	return &inputBytes
 }
 
 // Reads input and solves puzzle parts
 func main() {
+	start := time.Now()
+	inputBytes := readInput(inputPath)
+
 	// Part 1: How many characters need to be processed before the first
 	// 4-character start-of-packet marker is detected?
-	radio := readInput(inputPath)
+	radio := NewRadio(inputBytes)
 	charactersProcessed := radio.FindMarker(4)
-	fmt.Printf("Characters processed before 4-length marker: %v\n", *charactersProcessed)
+	log.Printf("Characters processed before 4-length marker: %v\n", *charactersProcessed)
 
 	// Part 2: How many characters need to be processed before the first
 	// 14-character start-of-packet marker is detected?
-	radio = readInput(inputPath)
+	radio = NewRadio(inputBytes)
 	charactersProcessed = radio.FindMarker(14)
-	fmt.Printf("Characters processed before 14-length marker: %v\n", *charactersProcessed)
+	log.Printf("Characters processed before 14-length marker: %v\n", *charactersProcessed)
+
+	// Execution time
+	elapsed := time.Since(start)
+	log.Printf("Execution time: %s\n", elapsed)
 }
