@@ -48,19 +48,26 @@ func readInput(path string) *[]byte {
 	return &inputBytes
 }
 
-// Does the heavy lifting, returns puzzle part answers
-// Split out from main for benchmarking
-func solvePuzzle() (*int, *int) {
-	inputBytes := readInput(inputPath)
-
-	// Part 1: How many characters need to be processed before the first
-	// 4-character start-of-packet marker is detected?
+// Part 1: How many characters need to be processed before the first
+// 4-character start-of-packet marker is detected?
+func solvePart1(inputBytes *[]byte) (*Radio, *int) {
 	radio := NewRadio(inputBytes)
 	answer1 := radio.FindMarker(4)
+	return radio, answer1
+}
 
-	// Part 2: How many characters need to be processed before the first
-	// 14-character start-of-packet marker is detected?
+// Part 2: How many characters need to be processed before the first
+// 14-character start-of-packet marker is detected?
+func solvePart2(radio *Radio) *int {
 	answer2 := radio.FindMarker(14)
+	return answer2
+}
+
+// Solves puzzle parts, split out for benchmarking
+func solvePuzzle() (*int, *int) {
+	inputBytes := readInput(inputPath)
+	radio, answer1 := solvePart1(inputBytes)
+	answer2 := solvePart2(radio)
 	return answer1, answer2
 }
 
