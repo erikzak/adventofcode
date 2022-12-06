@@ -5,7 +5,6 @@ package main
 import (
 	"log"
 	"os"
-	"time"
 )
 
 const inputPath = "../input.txt"
@@ -49,24 +48,25 @@ func readInput(path string) *[]byte {
 	return &inputBytes
 }
 
-// Reads input and solves puzzle parts
-func main() {
-	start := time.Now()
+// Does the heavy lifting, returns puzzle part answers
+// Split out from main for benchmarking
+func solvePuzzle() (*int, *int) {
 	inputBytes := readInput(inputPath)
 
 	// Part 1: How many characters need to be processed before the first
 	// 4-character start-of-packet marker is detected?
 	radio := NewRadio(inputBytes)
-	charactersProcessed := radio.FindMarker(4)
-	log.Printf("Characters processed before 4-length marker: %v\n", *charactersProcessed)
+	answer1 := radio.FindMarker(4)
 
 	// Part 2: How many characters need to be processed before the first
 	// 14-character start-of-packet marker is detected?
-	radio = NewRadio(inputBytes)
-	charactersProcessed = radio.FindMarker(14)
-	log.Printf("Characters processed before 14-length marker: %v\n", *charactersProcessed)
+	answer2 := radio.FindMarker(14)
+	return answer1, answer2
+}
 
-	// Execution time
-	elapsed := time.Since(start)
-	log.Printf("Execution time: %s\n", elapsed)
+// Reads input, solves puzzle parts and logs answers
+func main() {
+	answer1, answer2 := solvePuzzle()
+	log.Printf("Characters processed before 4-length marker: %v\n", *answer1)
+	log.Printf("Characters processed before 14-length marker: %v\n", *answer2)
 }
