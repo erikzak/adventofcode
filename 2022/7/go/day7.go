@@ -33,7 +33,7 @@ func NewFolder(name string, parent *Folder) *Folder {
 	return &folder
 }
 
-// Calculates total folder size with recurrance through subfolders
+// Calculates total folder size with recursion through subfolders
 func (folder *Folder) CalculateTotalSize() int {
 	totalSize := 0
 	for _, fileSize := range folder.files {
@@ -47,11 +47,12 @@ func (folder *Folder) CalculateTotalSize() int {
 	return totalSize
 }
 
-func (folder *Folder) GetDeleteCandidate(sizeTarget int, currentCandidate *Folder) *Folder {
+// Returns (sub)folder with total size closest to target size
+func (folder *Folder) GetDeleteCandidate(targetSize int, currentCandidate *Folder) *Folder {
 	for _, subfolder := range folder.subfolders {
-		currentCandidate = subfolder.GetDeleteCandidate(sizeTarget, currentCandidate)
+		currentCandidate = subfolder.GetDeleteCandidate(targetSize, currentCandidate)
 	}
-	if folder.totalSize >= sizeTarget &&
+	if folder.totalSize >= targetSize &&
 		(currentCandidate == nil || currentCandidate.totalSize > folder.totalSize) {
 		currentCandidate = folder
 	}
@@ -119,13 +120,13 @@ func solvePart1(root *Folder) int {
 	return root.GetTotalSize(sizeLimit)
 }
 
-// Part 2: ?
+// Part 2: What is the total size of best deletion candidate?
 func solvePart2(root *Folder) int {
 	totalSpace := 70000000
 	unusedSpace := totalSpace - root.totalSize
-	sizeTarget := 30000000 - unusedSpace
+	targetSize := 30000000 - unusedSpace
 	var currentCandidate *Folder
-	return root.GetDeleteCandidate(sizeTarget, currentCandidate).totalSize
+	return root.GetDeleteCandidate(targetSize, currentCandidate).totalSize
 }
 
 // Solves puzzle parts. Split up for benchmarking
@@ -140,5 +141,5 @@ func solvePuzzle() (int, int) {
 func main() {
 	answer1, answer2 := solvePuzzle()
 	log.Printf("Sum of total sizes of directories at most 100000: %v\n", answer1)
-	log.Printf("Total size of best delete candidate: %v\n", answer2)
+	log.Printf("Total size of best folder deletion candidate: %v\n", answer2)
 }
