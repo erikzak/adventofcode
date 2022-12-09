@@ -20,8 +20,8 @@ func check(err error) {
 }
 
 // ---------------------------------------------------------------------------
-// Keeps track of head, tail and moves.
-// Implements methods for moving head and tail.
+// Keeps track of rope knots, list of moves and locations visited.
+// Implements methods for moving head and knots.
 type Rope struct {
 	knots           []*Knot
 	moves           []string
@@ -80,7 +80,7 @@ func (rope *Rope) moveHead(direction string) {
 // Moves a rope knot incrementally closer to its leading knot if distance is more than one location.
 // Also keeps track of unique set of visitied locations
 func (rope *Rope) follow(knot *Knot, target Knot) {
-	if *knot == target {
+	if knot.x == target.x && knot.y == target.y {
 		return
 	}
 	dx, dy := knot.getDist(target)
