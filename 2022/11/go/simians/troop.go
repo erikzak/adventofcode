@@ -33,9 +33,9 @@ func (troop *Troop) Go(numRounds int) {
 				}
 				var target *Monkey
 				if monkey.test(value) {
-					target = troop.Monkeys[monkey.onTrueMonkey]
+					target = troop.Monkeys[monkey.onTrue]
 				} else {
-					target = troop.Monkeys[monkey.onFalseMonkey]
+					target = troop.Monkeys[monkey.onFalse]
 				}
 				target.items = append(target.items, value)
 				monkey.InspectionCount++
