@@ -84,9 +84,9 @@ func getBFSDistance(end string, parents map[string]string) (distance int) {
 
 // Simulates possible routes and finds the one with most pressure released
 func (cave Cave) getMaxPossiblePressureReleased(
-	startingLocation string, maxMinutes int, workers int,
-) int {
-	root := NewRoute(cave.valves[startingLocation])
+	startingLocation string, maxMinutes int, openedValves map[string]struct{},
+) Route {
+	root := NewRoute(cave.valves[startingLocation], openedValves)
 	bestRoute := root
 	routes := []Route{root}
 	for {
@@ -152,7 +152,7 @@ func (cave Cave) getMaxPossiblePressureReleased(
 		}
 	}
 	fmt.Print(bestRoute.history)
-	return bestRoute.pressureReleased
+	return bestRoute
 }
 
 func removeRoute(s []Route, i int) []Route {
@@ -170,9 +170,9 @@ type Route struct {
 	history          string
 }
 
-func NewRoute(start Valve) Route {
+func NewRoute(start Valve, opened map[string]struct{}) Route {
 	route := Route{
-		start: start, valves: []Valve{}, opened: map[string]struct{}{},
+		start: start, valves: []Valve{}, opened: opened,
 		minutesElapsed: 0, pressureReleased: 0,
 	}
 	return route
@@ -237,15 +237,18 @@ func readInput(path string) Cave {
 
 // Part 1: What is the most pressure you can release?
 func solvePart1(cave Cave) int {
-	mostReleasedPressure := cave.getMaxPossiblePressureReleased("AA", 30, 1)
-	return mostReleasedPressure
+	openedValves := map[string]struct{}{}
+	bestRoute := cave.getMaxPossiblePressureReleased("AA", 30, openedValves)
+	return bestRoute.pressureReleased
 }
 
 // Part 2: With you and an elephant working together for 26 minutes, what is
 // the most pressure you could release?
 func solvePart2(cave Cave) int {
-	mostReleasedPressure := cave.getMaxPossiblePressureReleased("AA", 26, 2)
-	return mostReleasedPressure
+	openedValves := map[string]struct{}{}
+	firstRoute := cave.getMaxPossiblePressureReleased("AA", 26, openedValves)
+	secondRoute := cave.getMaxPossiblePressureReleased("AA", 26, firstRoute.opened)
+	return firstRoute.pressureReleased + secondRoute.pressureReleased
 }
 
 // Solves puzzle parts. Split up for benchmarking
