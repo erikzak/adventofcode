@@ -218,28 +218,6 @@ func (tetris *Tetris) findLoop() (int, int) {
 	}
 }
 
-// Drops blocks until a looping pattern is found, then returns the number of loop blocks and tower height
-func (tetris *Tetris) findLoopUsingDelta() (int, int) {
-	heightHash := map[Node][3]int{}
-	for {
-		tetris.dropBlock(false, false)
-		// Compare delta height with last similar index, and store with jet and shape index as "hash"
-		idx := Node{tetris.shpIdx, tetris.jetIdx}
-		last, seen := heightHash[idx]
-		if seen {
-			last_dy := last[1] - last[0]
-			current_dy := tetris.currentHeight - last[1]
-			delta_blocks := tetris.blocks - last[2]
-			if last_dy == current_dy {
-				return delta_blocks, current_dy
-			}
-			heightHash[idx] = [3]int{last[1], int(tetris.currentHeight), delta_blocks}
-		} else {
-			heightHash[idx] = [3]int{0, int(tetris.currentHeight), tetris.blocks}
-		}
-	}
-}
-
 // Keeps track of shape properties, with grid node map and dimensions
 type Shape struct {
 	nodes    []Node
