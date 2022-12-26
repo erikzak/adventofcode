@@ -17,7 +17,7 @@ func TestPart1Example(t *testing.T) {
 
 // Tests part 2 against example data
 func TestPart2Example(t *testing.T) {
-	want := 0
+	want := 62 * 56
 	input := readInput("../test.txt")
 	answer2 := solvePart2(input)
 	if answer2 != want {
