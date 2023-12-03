@@ -1,13 +1,5 @@
 //! Advent of Code 2023 day 2
-use std::{fs, collections::HashMap};
-
-
-fn read_file(file_path: &str) -> String {
-    // Returns file contents as string
-    fs::read_to_string(file_path)
-        .expect("wtf")
-        .trim().to_string()
-}
+use std::collections::HashMap;
 
 
 fn generate_hashmaps(input: &str) -> (HashMap<[u8; 2], u32>, HashMap<[u8; 2], char>) {
@@ -112,7 +104,7 @@ fn part_dos(input: &str) {
 
 fn main() {
     // Reads input and runs solve functions for parts
-    let input: String = read_file("input.txt");
-    part_uno(&input);
-    part_dos(&input);
+    let input: &str = include_str!("../input.txt");
+    part_uno(input);
+    part_dos(input);
 }
