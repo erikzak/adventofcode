@@ -1,4 +1,4 @@
-//! Advent of Code 2023 day 2
+//! Advent of Code 2023 day 3
 use std::collections::HashMap;
 
 
