@@ -31,7 +31,7 @@ fn parse_input(input: &str, part1: bool) -> (Vec<Seed>, HashMap<String, Map>) {
 
 
 struct Map {
-    // Keeps track of mapped sources, destinations and ranges
+    // Keeps track of mapped sources, destinations and ranges.
     map_type: String,
     sources: Vec<u64>,
     destinations: Vec<u64>,
@@ -39,6 +39,7 @@ struct Map {
 }
 
 impl Map {
+    // Implements methods for mapping forward or in reverse
     fn new(input: &str) -> Map {
         let lines: Vec<&str> = input.lines().collect();
         let map_type: String = lines[0].split_whitespace().collect::<Vec<&str>>()[0].to_string();
@@ -78,20 +79,19 @@ impl Map {
 }
 
 struct Seed {
-    // Keeps track of seed properties 
     number: u64,
     range: u64,
 }
 
 
 impl Seed {
-    // Implements Seed methods to map seeds to locations
     fn new(number: u64, range: u64) -> Seed {
         Seed{ number, range }
     }
 }
 
 fn map_to_location(seed: u64, maps: &HashMap<String, Map>) -> u64 {
+    // Maps seed to location
     let soil: u64 = maps["seed-to-soil"].forward(seed);
     let fertilizer: u64 = maps["soil-to-fertilizer"].forward(soil);
     let water: u64 = maps["fertilizer-to-water"].forward(fertilizer);
@@ -103,6 +103,7 @@ fn map_to_location(seed: u64, maps: &HashMap<String, Map>) -> u64 {
 
 
 fn map_to_seed(location: u64, maps: &HashMap<String, Map>) -> u64 {
+    // Maps location to seed
     let humidity: u64 = maps["humidity-to-location"].reverse(location);
     let temperature: u64 = maps["temperature-to-humidity"].reverse(humidity);
     let light: u64 = maps["light-to-temperature"].reverse(temperature);
