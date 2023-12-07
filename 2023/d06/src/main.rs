@@ -1,4 +1,4 @@
-//! Advent of Code 2023 day 5
+//! Advent of Code 2023 day 6
 use std::iter::zip;
 
 
@@ -10,7 +10,7 @@ struct Race {
 
 impl Race {
     fn ways(self) -> u64 {
-        // Returns ways of winning the race
+        // Returns number of ways of winning the race
         let mut ways: u64 = 0;
         for ms in 1..self.time-1 {
             if self.winning(ms) {
@@ -47,6 +47,7 @@ fn part_uno(_input: &str) -> u64  {
     for (time, record) in zip(times, records) {
         races.push(Race{time, record});
     }
+    // Solve
     for race in races {
         let ways: u64 = race.ways();
         answer = if answer == 0 { ways } else { answer * ways };
