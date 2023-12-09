@@ -1,4 +1,4 @@
-//! Advent of Code 2023 day 7
+//! Advent of Code 2023 day 8
 use std::collections::HashMap;
 
 #[derive(Debug)]
