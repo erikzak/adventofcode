@@ -8,3 +8,6 @@ overengineered.
 
 ## 2023
 Time to Rust.
+
+## 2024
+Low-effort, comfortable python.
