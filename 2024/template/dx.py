@@ -2,6 +2,12 @@
 import sys
 
 
+def get_input(file_path: str) -> str:
+    """Returns content from puzzle string file tailored for today's puzzle."""
+    with open(file_path, "r", encoding="utf-8") as reader:
+        return reader.readlines()
+
+
 def solve_part1(puzzle: str) -> int:
     """Solution part 1."""
 
@@ -14,8 +20,7 @@ def main():
     """Runs puzzle solutions."""
     test = any(arg in ["-t", "--test"] for arg in sys.argv)
     input_file = "test.txt" if (test) else "input.txt"
-    with open(input_file, "r", encoding="utf-8") as reader:
-        puzzle_input = reader.readlines()
+    puzzle_input = get_input(input_file)
     print(solve_part1(puzzle_input))
     print(solve_part2(puzzle_input))
 
