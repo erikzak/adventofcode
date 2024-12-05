@@ -49,6 +49,13 @@ def solve_part2(rules: dict[int, set[int]], updates: list[list[int]]) -> int:
 
 def fix_update(update: list[int], rules: dict[int, set[int]]) -> list[int]:
     """Returns a correctly ordered update."""
+    seen = []
+    for page in update:
+        for after, befores in rules.items():
+            if (page in befores and after in seen):
+                update.insert(update.index(after), update.pop(update.index(page)))
+                return fix_update(update, rules)
+        seen.append(page)
     return update
 
 
