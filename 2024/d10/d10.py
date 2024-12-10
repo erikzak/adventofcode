@@ -116,14 +116,14 @@ class Map:
                     queue.put((neighbor, distance + 1))
         return None
 
-    def get_paths(self, start: Node, end: Node) -> int | None:
+    def get_paths(self, start: Node, end: Node) -> list[list[Coords]]:
         """
         Breadth-first search implementation for all manhattan distance paths from
         start to end along incrementing elevation.
 
         Returns empty list if no path found.
         """
-        paths: list[Coords] = []
+        paths: list[list[Coords]] = []
         explored_paths: set[tuple[Coords]] = set()
         queue = Queue()
         path: list[Coords] = [start.coords]
