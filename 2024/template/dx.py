@@ -2,17 +2,17 @@
 import sys
 
 
-def get_input(file_path: str) -> str:
+def get_input(file_path: str) -> list[str]:
     """Returns content from puzzle string file tailored for today's puzzle."""
     with open(file_path, "r", encoding="utf-8") as reader:
         return reader.readlines()
 
 
-def solve_part1(puzzle: str) -> int:
+def solve_part1(puzzle: list[str]) -> int:
     """Solution part 1."""
 
 
-def solve_part2(puzzle: str) -> int:
+def solve_part2(puzzle: list[str]) -> int:
     """Solution part 2."""
 
 
