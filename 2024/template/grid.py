@@ -46,7 +46,6 @@ class Map:
     """Map stuff."""
     def __init__(self, data: list[str]) -> None:
         self.index: dict[Coords, Node] = {}
-        x, y = None, None
         for y, line in enumerate(reversed(data)):
             for x, char in enumerate(line):
                 node = Node((x, y), char)
@@ -67,7 +66,7 @@ class Map:
         """Returns a generator of map nodes."""
         yield from self.index.values()
 
-    def get_node(self, coords: Coords) -> Node:
+    def get_node(self, coords: Coords) -> Node | None:
         """Returns node at given coordinates, or None if out of bounds."""
         return self.index.get(coords)
 
@@ -75,7 +74,7 @@ class Map:
         """Outputs the map to command line."""
         print(str(self))
 
-    def get_manhattan_neighbors(self, node: Node) -> list[Node]:
+    def get_manhattan_neighbors(self, node: Node) -> list[Node | None]:
         """Returns list of neighboring nodes inside map boundary in XY direction only."""
         neighbors = [
             self.get_node((node.x - 1, node.y)),
