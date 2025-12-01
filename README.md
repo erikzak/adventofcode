@@ -11,3 +11,6 @@ Time to Rust.
 
 ## 2024
 Low-effort, comfortable python.
+
+## 2025
+TypeScript?
