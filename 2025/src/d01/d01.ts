@@ -1,5 +1,5 @@
 // Advent of Code day 1
-import getDayInput from "../shared-code/input-parser.ts"
+import getDayInput from "../lib/input-parser.ts"
 
 
 const DAY: string = "d01"
@@ -47,11 +47,16 @@ const getRotation = (line: string): number => {
 }
 
 
-export const main = () => {
-    const input = getDayInput(DAY, TEST)
-    console.log(solvePart1(input))
-    console.log(solvePart2(input))
+export const main = (input: string[]): number[] => {
+    const part1 = solvePart1(input)
+    console.log(part1)
+    const part2 = solvePart2(input)
+    console.log(part2)
+    return [part1, part2]
 }
 
 
-main()
+if (import.meta.main) {
+    const input = getDayInput(DAY, TEST)
+    main(input)
+}
