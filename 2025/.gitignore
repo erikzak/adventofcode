@@ -10,9 +10,9 @@ yarn-error.log*
 # TypeScript build artifacts
 dist/
 build/
-*.js
-*.d.ts
-*.map
+
+# Vite
+.vite/
 
 # Editor/IDE files
 .vscode/
@@ -31,7 +31,5 @@ coverage/
 .env
 .env.local
 
-# npm package lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# Logs
+*.log
