@@ -5,6 +5,32 @@
   z-index: 1;
 }
 
+.music-toggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1003;
+  background: linear-gradient(135deg, #d42426 0%, #8b0000 100%);
+  border: 3px solid var(--text-gold);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  animation: twinkle 2s infinite;
+}
+
+.music-toggle:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.music-toggle:active {
+  transform: scale(0.95);
+}
+
 .app::before {
   content: '🎅 🎄 ⛄ 🎁 🔔 ⭐ 🦌 🤶 🧝 🎀 🎅 🍬 ❄️ 🎁 🎄 🛷 🎅 🎉';
   position: fixed;
