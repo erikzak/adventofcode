@@ -27,7 +27,7 @@ export interface Grid {
 
 export class Grid implements Grid {
     constructor(input: string[]) {
-        const rows: Node[][] = input.reverse().map((line, y) =>
+        const rows: Node[][] = input.slice().reverse().map((line, y) =>
             line.split("").map((char, x) => ({
                 key: `${x},${y}`,
                 coords: { x, y },

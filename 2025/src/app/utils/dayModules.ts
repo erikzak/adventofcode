@@ -6,5 +6,6 @@ export const dayModules = {
   4: () => import('../../d04/d04.ts'),
   5: () => import('../../d05/d05.ts'),
   6: () => import('../../d06/d06.ts'),
+  7: () => import('../../d07/d07.ts'),
   // Add more days as they are implemented
 }
