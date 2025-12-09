@@ -10,7 +10,7 @@ export interface Coordinate {
 export interface Node {
     key: string
     coords: Coordinate
-    value: string | number
+    value?: string | number
 }
 
 
