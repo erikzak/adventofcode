@@ -14,7 +14,7 @@ export interface Node {
 }
 
 
-export interface Grid {
+export interface IGrid {
     nodes: Map<string, Node>
     width: number
     height: number
@@ -25,7 +25,13 @@ export interface Grid {
 }
 
 
-export class Grid implements Grid {
+export class Grid implements IGrid {
+    nodes: Map<string, Node>
+    width: number
+    height: number
+    rows: Node[][]
+    columns: Node[][]
+
     constructor(input: string[]) {
         const rows: Node[][] = input.slice().reverse().map((line, y) =>
             line.split("").map((char, x) => ({
